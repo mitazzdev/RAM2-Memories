@@ -102,6 +102,9 @@ section{padding:100px 20px}
 .pm-photos .polaroid{transform:rotate(var(--r,-1deg));width:auto;padding:10px 10px 38px}
 .pm-photos .polaroid-row.landscape .polaroid img{width:160px;height:auto}
 .pm-photos .polaroid-row.portrait .polaroid img{width:120px;height:auto}
+.pm-loading{display:flex;flex-direction:column;align-items:center;gap:14px;padding:40px 0;color:var(--muted);font-family:'K2D',sans-serif;font-weight:300;font-size:.9rem}
+.pm-spinner{width:32px;height:32px;border:3px solid var(--line);border-top-color:var(--rose);border-radius:50%;animation:spin .8s linear infinite}
+@keyframes spin{to{transform:rotate(360deg)}}
 .pm-text{font-size:16px;line-height:1.9;color:#5c554f}
 .pm-text p{margin:0 0 12px}
 .pm-signature{font-family:'Playfair Display',serif;font-size:18px;color:var(--rose-dark);margin-top:20px;text-align:right}
@@ -264,7 +267,7 @@ section{padding:100px 20px}
     <div class="event"><span class="dot"></span><strong>วันแรก</strong><p>เด็ก BME คนหนึ่งเดินเข้ามาทำงานที่ RAM2 ตอนนั้นยังไม่รู้เลยว่าจะต้องเจออะไรบ้าง</p></div>
     <div class="event"><span class="dot"></span><strong>ช่วงแรก ๆ</strong><p>มีทั้งเรื่องที่ทำเป็นและเรื่องที่ไม่เคยทำ บางอย่างต้องถาม บางอย่างต้องลองผิดลองถูกเอาเอง</p></div>
     <div class="event"><span class="dot"></span><strong>ระหว่างทาง</strong><p>ได้รู้จักทั้งเครื่องมือ งานในแต่ละแผนก คนไข้ พี่ ๆ ในโรงพยาบาล แล้วก็ได้รู้ว่าการทำงานจริง ๆ มีอะไรอีกเยอะที่ไม่มีในหนังสือ</p></div>
-    <div class="event"><span class="dot"></span><strong>วันนี้</strong><p>สองปีผ่านไปเร็วมาก จากที่เคยเป็นคนใหม่ของที่นี่ วันนี้กลับกลายเป็นว่าต้องบอกลาทุกคนแล้ว แงงง</p></div>
+    <div class="event"><span class="dot"></span><strong>วันนี้</strong><p>สองปีผ่านไปเร็วมาก จากที่เคยเป็นน้องใหม่ของที่นี่ วันนี้กลับกลายเป็นว่าต้องบอกลาทุกคนแล้ว แงงง</p></div>
   </div>
 </div>
 </section>
@@ -507,7 +510,10 @@ async function openPersonModal(i) {
   const p = PEOPLE[i];
   pmName.textContent = p.name;
   pmText.innerHTML = p.text;
-  pmPhotos.innerHTML = '';
+  pmPhotos.innerHTML = '<div class="pm-loading"><div class="pm-spinner"></div><div>กำลังโหลดรูป...</div></div>';
+
+  personOverlay.classList.add('open');
+  document.body.style.overflow = 'hidden';
 
   const files = PHOTOS[p.folder] || [];
   const landscape = [];
@@ -551,11 +557,10 @@ async function openPersonModal(i) {
     pmPhotos.appendChild(row);
   }
 
+  pmPhotos.innerHTML = '';
   addRow(landscape, 'landscape');
   addRow(portrait, 'portrait');
 
-  personOverlay.classList.add('open');
-  document.body.style.overflow = 'hidden';
   personModalLoading = false;
 }
 

@@ -73,12 +73,13 @@ section{padding:100px 20px}
 .signature{font-family:'Playfair Display',serif;font-size:20px;color:var(--rose-dark);margin-top:24px}
 
 /* ===== POLAROID ===== */
-.polaroid{background:white;padding:10px 10px 14px;border-radius:3px;box-shadow:0 3px 15px rgba(0,0,0,.08);position:relative;cursor:pointer;transition:transform .4s ease,box-shadow .3s ease;flex-shrink:0}
+.polaroid{background:white;padding:10px 10px 38px;border-radius:3px;box-shadow:0 3px 15px rgba(0,0,0,.08);position:relative;cursor:pointer;transition:transform .4s ease,box-shadow .3s ease;flex-shrink:0}
 .polaroid:hover{transform:translateY(-5px) rotate(0deg)!important;box-shadow:0 12px 35px rgba(0,0,0,.12)}
 .polaroid img{width:200px;height:200px;object-fit:cover;display:block;border-radius:1px}
 .polaroid .ph{width:200px;height:200px;background:linear-gradient(135deg,#f5f0eb,#ede7e0);display:flex;align-items:center;justify-content:center;border-radius:1px;font-size:2.5rem;color:#d5cfc9}
-.polaroid .cap{font-family:'K2D',sans-serif;font-weight:300;font-size:.78rem;color:var(--muted);text-align:center;line-height:1.35;margin-top:6px;padding:0 4px;max-width:200px}
+.polaroid .cap{position:absolute;bottom:8px;left:0;right:0;font-family:'K2D',sans-serif;font-weight:300;font-size:.72rem;color:var(--muted);text-align:center;line-height:1.3;padding:0 14px;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
 .polaroid .cap:empty{display:none}
+.polaroid .cap.long{font-size:.6rem;white-space:normal;display:-webkit-box;-webkit-line-clamp:2;-webkit-box-orient:vertical;overflow:hidden}
 .polaroid::before{content:'';position:absolute;top:-8px;left:50%;transform:translateX(-50%) rotate(var(--tape-r,-2deg));width:50px;height:16px;background:var(--tape);border-radius:1px;z-index:2}
 
 /* ===== PEOPLE — NAME CARDS ONLY ===== */
@@ -98,7 +99,7 @@ section{padding:100px 20px}
 .pm-name{font-family:'K2D',sans-serif;font-weight:300;font-size:34px;margin:0 0 20px;text-align:center}
 .pm-photos{display:flex;flex-direction:column;align-items:center;gap:1rem;margin-bottom:2rem}
 .pm-photos .polaroid-row{display:flex;flex-wrap:wrap;gap:1rem;justify-content:center}
-.pm-photos .polaroid{transform:rotate(var(--r,-1deg));width:auto;padding:10px 10px 14px}
+.pm-photos .polaroid{transform:rotate(var(--r,-1deg));width:auto;padding:10px 10px 38px}
 .pm-photos .polaroid-row.landscape .polaroid img{width:160px;height:auto}
 .pm-photos .polaroid-row.portrait .polaroid img{width:120px;height:auto}
 .pm-text{font-size:16px;line-height:1.9;color:#5c554f}
@@ -284,7 +285,7 @@ section{padding:100px 20px}
 <section id="aoy" class="aoy-bottom">
 <div class="container">
   <div class="section-label reveal" style="text-align:center">For someone special</div>
-  <h2 class="section-title reveal" style="text-align:center">ถึงพี่ออย 🤍</h2>
+  <h2 class="section-title reveal" style="text-align:center;font-family:'K2D',sans-serif;font-weight:300">ถึงพี่ออย 🤍</h2>
   <div class="people-grid" style="max-width:280px;margin:0 auto">
     <div class="name-card reveal" onclick="openPersonModal(4)">
       <div class="nc-name">พี่ออย</div>
@@ -369,7 +370,7 @@ const PHOTOS = {
   kob: ['IMG_1846.jpg','IMG_6742.jpg'],
   oat: ['IMG_3369.jpg','IMG_4158.jpg','IMG_4250.jpg'],
   'kade-pleng': ['IMG_7361.jpg'],
-  hemo: ['IMG_0722.jpg','IMG_4499.jpg']
+  hemo: ['IMG_0722.jpg','IMG_4499.jpg','IMG_5650.JPG','IMG_7457.jpg']
 };
 
 const BASE = 'ram2-memories';
@@ -397,6 +398,8 @@ const CAPTIONS = {
   'ram2-memories/oil/IMG_9059.jpg': 'ไม่เคยห้าม ซัพพอร์ตตลอด',
   'ram2-memories/oil/IMG_9718.jpg': 'เจอกันวันแรก <3',
   'ram2-memories/oil/IMG_9710.jpg': 'ขนของงงง',
+  'ram2-memories/hemo/IMG_5650.JPG': 'อำลาแผนกไตเทียม',
+  'ram2-memories/hemo/IMG_7457.jpg': 'จับของขวัญปีใหม่',
 };
 
 function getCaption(folder, file) {
@@ -454,10 +457,8 @@ async function renderGallery(containerId, folder, files) {
       pol.appendChild(item.img);
       if (cap) {
         const capEl = document.createElement('div');
-        capEl.className = 'cap';
+        capEl.className = 'cap' + (cap.length > 25 ? ' long' : '');
         capEl.textContent = cap;
-        if (cap.length > 30) capEl.style.fontSize = '.65rem';
-        else if (cap.length > 20) capEl.style.fontSize = '.72rem';
         pol.appendChild(capEl);
       }
       row.appendChild(pol);
@@ -531,10 +532,8 @@ async function openPersonModal(i) {
       pol.appendChild(item.img);
       if (cap) {
         const capEl = document.createElement('div');
-        capEl.className = 'cap';
+        capEl.className = 'cap' + (cap.length > 25 ? ' long' : '');
         capEl.textContent = cap;
-        if (cap.length > 30) capEl.style.fontSize = '.65rem';
-        else if (cap.length > 20) capEl.style.fontSize = '.72rem';
         pol.appendChild(capEl);
       }
       row.appendChild(pol);

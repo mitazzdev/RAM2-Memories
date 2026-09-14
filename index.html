@@ -495,7 +495,11 @@ const pmName = document.getElementById('pmName');
 const pmPhotos = document.getElementById('pmPhotos');
 const pmText = document.getElementById('pmText');
 
+let personModalLoading = false;
+
 async function openPersonModal(i) {
+  if (personModalLoading) return;
+  personModalLoading = true;
   const p = PEOPLE[i];
   pmName.textContent = p.name;
   pmText.innerHTML = p.text;
@@ -548,6 +552,7 @@ async function openPersonModal(i) {
 
   personOverlay.classList.add('open');
   document.body.style.overflow = 'hidden';
+  personModalLoading = false;
 }
 
 function closePersonModal(e) {

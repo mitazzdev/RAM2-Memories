@@ -17,14 +17,14 @@ body{color:var(--ink);background:var(--cream);font-family:''Bai Jamjuree'',sans-
 #opening{position:fixed;inset:0;background:var(--cream);z-index:1000;display:flex;flex-direction:column;align-items:center;justify-content:center;transition:opacity .8s ease,visibility .8s ease}
 #opening.hidden{opacity:0;visibility:hidden;pointer-events:none}
 .open-envelope{position:relative;width:180px;height:120px;cursor:pointer;transition:transform .4s ease}
-.open-envelope:hover{transform:scale(1.04) rotate(-1deg)}
-.env-body{width:100%;height:100%;background:linear-gradient(135deg,#fce4ec,#f8bbd0);border-radius:6px;position:relative;box-shadow:0 6px 25px rgba(232,160,191,.25)}
-.env-flap{position:absolute;top:0;left:0;width:100%;height:60px;background:linear-gradient(135deg,#f48fb1,#f06292);clip-path:polygon(0 0,50% 100%,100% 0);z-index:2;transform-origin:top;transition:transform .6s ease}
+.open-envelope:hover{transform:scale(1.05) rotate(-1.5deg)}
+.env-body{width:100%;height:100%;background:linear-gradient(135deg,#e8dfd5,#ddd2c5);border-radius:8px;position:relative;box-shadow:0 10px 40px rgba(180,168,152,.4),0 2px 8px rgba(180,168,152,.2)}
+.env-flap{position:absolute;top:0;left:0;width:100%;height:60px;background:linear-gradient(135deg,#c4b8aa,#b5a898);clip-path:polygon(0 0,50% 100%,100% 0);z-index:2;transform-origin:top;transition:transform .6s ease}
 .open-envelope.opening .env-flap{transform:rotateX(180deg)}
 .env-heart{position:absolute;top:50%;left:50%;transform:translate(-50%,-50%);font-size:2rem;z-index:3;animation:heartbeat 1.5s ease-in-out infinite}
 @keyframes heartbeat{0%,100%{transform:translate(-50%,-50%) scale(1)}15%{transform:translate(-50%,-50%) scale(1.12)}30%{transform:translate(-50%,-50%) scale(1)}45%{transform:translate(-50%,-50%) scale(1.08)}}
-.open-hint{margin-top:2rem;font-size:.9rem;color:var(--muted);letter-spacing:1px;animation:fadeUp 2.5s ease-in-out infinite}
-@keyframes fadeUp{0%,100%{opacity:.5;transform:translateY(0)}50%{opacity:1;transform:translateY(-3px)}}
+.open-hint{margin-top:2rem;font-family:'K2D',sans-serif;font-weight:300;font-size:.9rem;color:var(--muted);letter-spacing:1px;animation:fadeUp 2.5s ease-in-out infinite}
+@keyframes fadeUp{0%,100%{opacity:.4;transform:translateY(0)}50%{opacity:1;transform:translateY(-4px)}}
 
 /* ===== LETTER ===== */
 #letter-reveal{position:fixed;inset:0;background:rgba(251,247,240,.97);z-index:999;display:flex;align-items:center;justify-content:center;opacity:0;visibility:hidden;transition:all .8s ease;padding:2rem}
